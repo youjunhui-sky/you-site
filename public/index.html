@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>youjunhui — 数据工程 × 全栈</title>
-<meta name="description" content="数据工程 × 全栈开发者。把业务做成看得见的数据：跨境电商数据中台、运营预警看板、B2B 全栈站点。">
-<meta property="og:title" content="youjunhui — 数据工程 × 全栈">
-<meta property="og:description" content="把业务做成看得见的数据。跨境电商数据中台 · 运营看板 · 全栈站点。">
+<title>youjunhui — 一个人，几个 agent，把事办成</title>
+<meta name="description" content="一个人 + 几个 AI agent = 一个团队的产出。电商数据基建、经营看板、独立站建站，全部生产在跑。">
+<meta property="og:title" content="youjunhui — 一个人，几个 agent，把事办成">
+<meta property="og:description" content="一个人 + 几个 AI agent = 一个团队的产出。">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c1917'/%3E%3Ctext x='32' y='43' font-family='ui-monospace,monospace' font-size='32' font-weight='700' fill='%23fafaf9' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
 <style>
   :root{
     --bg:#fafaf9; --fg:#1c1917; --muted:#78716c; --line:#e7e5e4;
-    --card:#ffffff; --accent:#2563eb; --ok:#16a34a; --warn:#d97706;
+    --card:#ffffff; --ok:#16a34a; --warn:#d97706;
   }
   @media (prefers-color-scheme: dark){
     :root{ --bg:#0c0a09; --fg:#fafaf9; --muted:#a8a29e; --line:#292524;
-      --card:#151210; --accent:#60a5fa; --ok:#4ade80; --warn:#fbbf24; }
+      --card:#151210; --ok:#4ade80; --warn:#fbbf24; }
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ -webkit-text-size-adjust:100%; }
@@ -28,7 +28,6 @@
   .wrap{ max-width:720px; margin:0 auto; padding:0 24px; }
   a{ color:inherit; }
 
-  /* header */
   header{ padding:28px 0 0; }
   .nav{ display:flex; align-items:center; justify-content:space-between; }
   .mark{ width:34px; height:34px; border-radius:9px; background:var(--fg); color:var(--bg);
@@ -37,14 +36,14 @@
   nav a{ text-decoration:none; color:var(--muted); font-size:14px; margin-left:20px; }
   nav a:hover{ color:var(--fg); }
 
-  /* hero */
   .hero{ padding:72px 0 56px; }
   .avatar{ width:76px; height:76px; border-radius:50%; background:var(--fg); color:var(--bg);
     display:flex; align-items:center; justify-content:center;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:32px; font-weight:700;
     margin-bottom:24px; }
   h1{ font-size:34px; font-weight:700; letter-spacing:-.02em; line-height:1.2; }
-  .tagline{ margin-top:10px; font-size:17px; color:var(--muted); }
+  .tagline{ margin-top:10px; font-size:18px; }
+  .sub{ margin-top:8px; font-size:15px; color:var(--muted); }
   .now{ margin-top:14px; font-size:14px; color:var(--muted); }
   .now .dot{ color:var(--ok); }
   .socials{ margin-top:22px; display:flex; gap:10px; }
@@ -54,34 +53,31 @@
   .socials a:hover{ border-color:var(--fg); color:var(--fg); }
   .socials svg{ width:18px; height:18px; fill:currentColor; }
 
-  /* section */
   h2{ font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
     color:var(--muted); margin-bottom:18px;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
-  section{ padding:8px 0 48px; }
+  section{ padding:8px 0 44px; }
 
-  /* projects */
-  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  @media (max-width:640px){ .grid{ grid-template-columns:1fr; } }
-  .card{ border:1px solid var(--line); background:var(--card); border-radius:14px; padding:20px;
-    transition:border-color .15s; }
-  .card:hover{ border-color:var(--muted); }
-  .card .top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
-  .card h3{ font-size:16px; font-weight:650; letter-spacing:-.01em; }
-  .status{ font-size:11px; white-space:nowrap; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
-  .status.run{ color:var(--ok); } .status.beta{ color:var(--warn); } .status.plan{ color:var(--muted); }
-  .card p{ margin-top:8px; font-size:14px; color:var(--muted); }
-  .tags{ margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
-  .tags span{ font-size:11.5px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:2px 9px; }
-  a.card{ text-decoration:none; display:block; }
+  /* 工作风格 */
+  .plines{ display:grid; gap:12px; }
+  .pline{ display:flex; gap:14px; font-size:15px; align-items:baseline; flex-wrap:wrap; }
+  .pline b{ font-weight:650; white-space:nowrap; }
+  .pline span{ color:var(--muted); }
 
-  /* stack */
-  .stack{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px;
-    color:var(--muted); line-height:2; }
-  .stack b{ color:var(--fg); font-weight:600; }
+  /* 建过的东西：紧凑清单 */
+  .list{ border-top:1px solid var(--line); }
+  .row{ display:flex; align-items:baseline; gap:14px; padding:13px 0;
+    border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .row .nm{ font-weight:600; font-size:15px; white-space:nowrap; }
+  .row .ds{ color:var(--muted); font-size:14px; flex:1; min-width:220px; }
+  .row .st{ font-size:11px; white-space:nowrap;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .st.run{ color:var(--ok); } .st.live{ color:var(--ok); } .st.wip{ color:var(--warn); }
 
-  /* footer */
+  /* contact */
+  .contact-p{ font-size:15px; color:var(--muted); }
+  .contact-p b{ color:var(--fg); font-weight:650; }
+
   footer{ border-top:1px solid var(--line); padding:26px 0 40px; margin-top:16px;
     display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
   footer, footer a{ font-size:13px; color:var(--muted); text-decoration:none; }
@@ -95,7 +91,8 @@
     <div class="nav">
       <div class="mark">Y</div>
       <nav>
-        <a href="#projects">项目</a>
+        <a href="#how">风格</a>
+        <a href="#built">建过的</a>
         <a href="#contact">联系</a>
       </nav>
     </div>
@@ -104,51 +101,36 @@
   <div class="hero">
     <div class="avatar">Y</div>
     <h1 id="who">youjunhui</h1>
-    <p class="tagline">数据工程 × 全栈 —— 把业务做成看得见的数据。</p>
-    <p class="now"><span class="dot">●</span> 现在：跨境电商数据基建 · 在 X 记录构建过程</p>
+    <p class="tagline">一个人，几个 agent，把事办成。</p>
+    <p class="sub">电商数据基建 · 经营看板 · 独立站 —— 全部生产在跑，不停留在 PPT。</p>
+    <p class="now"><span class="dot">●</span> 现在：在 X 记录 AI 原生的工作方式</p>
     <div class="socials" id="socials"></div>
   </div>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="grid">
-
-      <div class="card">
-        <div class="top"><h3>Crosspower 数据中台</h3><span class="status run">● 运行中</span></div>
-        <p>跨境电商运营数据体系：领星 ERP API → PostgreSQL ETL → 实时运营看板，覆盖库存、物流、利润全链路，支撑每日经营决策。</p>
-        <div class="tags"><span>Python</span><span>PostgreSQL</span><span>FastAPI</span><span>ETL</span></div>
-      </div>
-
-      <div class="card">
-        <div class="top"><h3>业务预警看板</h3><span class="status run">● 运行中</span></div>
-        <p>老板视角的业务预警系统：每日自动识别异常 SKU 与断货风险，按优先级分类，把「该拍板的事」推到眼前。</p>
-        <div class="tags"><span>Data Viz</span><span>Alerting</span><span>决策支持</span></div>
-      </div>
-
-      <div class="card">
-        <div class="top"><h3>Callsun B2B 官网</h3><span class="status run">● 已上线</span></div>
-        <p>光伏储能企业官网全栈建设：Astro + Cloudflare Workers + D1，内容管理、询盘系统、SEO 一体，线上稳定运行。</p>
-        <div class="tags"><span>Astro</span><span>Cloudflare Workers</span><span>D1</span></div>
-      </div>
-
-      <div class="card">
-        <div class="top"><h3>多业务数据中枢</h3><span class="status plan">○ 规划中</span></div>
-        <p>把多个业务线的数据收进同一个中枢：统一口径、统一报表、统一决策入口。另：南非零售 POS 私有化方案设计中。</p>
-        <div class="tags"><span>Data Hub</span><span>POS</span><span>方案设计</span></div>
-      </div>
-
+  <section id="how">
+    <h2>How I Work</h2>
+    <div class="plines">
+      <div class="pline"><b>Agent 干活，我拍板</b><span>AI 跑日常，人握最终决定权</span></div>
+      <div class="pline"><b>数据说话</b><span>能量化的不拍脑袋</span></div>
+      <div class="pline"><b>件件闭环</b><span>没有结果不销单，没有证据不开口</span></div>
     </div>
   </section>
 
-  <section>
-    <h2>Stack</h2>
-    <p class="stack"><b>Python</b> · SQL · FastAPI · PostgreSQL · <b>Astro</b> · Cloudflare Workers · Tailwind · Git</p>
+  <section id="built">
+    <h2>Built</h2>
+    <div class="list">
+      <div class="row"><span class="nm">Crosspower 数据中台</span><span class="ds">电商全链路数据：ETL → PostgreSQL → 实时经营看板</span><span class="st run">● 生产</span></div>
+      <div class="row"><span class="nm">经营预警看板</span><span class="ds">每天把「该拍板的事」推到眼前</span><span class="st run">● 生产</span></div>
+      <div class="row"><span class="nm">Callsun B2B 官网</span><span class="ds">光伏 B2B 独立站：询盘 / CRM / SEO 一体</span><span class="st live">● 上线</span></div>
+      <div class="row"><span class="nm">私域 analytics + CRM</span><span class="ds">独立站访客数据回流，业务统计自建闭环</span><span class="st run">● 生产</span></div>
+      <div class="row"><span class="nm">南非超市 POS 方案</span><span class="ds">私有化部署方案设计中</span><span class="st wip">○ 进行中</span></div>
+    </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p class="tagline" style="margin-top:0">找我聊数据、跨境电商、或者一起做点东西 —— X 上私信最快。</p>
-    <div class="socials" id="socials2" style="margin-top:16px"></div>
+    <p class="contact-p" style="margin-bottom:16px">聊数据、AI 工作流、或者一起做点东西 —— <b>X 上私信最快</b>。</p>
+    <div class="socials" id="socials2" style="margin-top:0"></div>
   </section>
 
   <footer>
@@ -161,10 +143,10 @@
 <script>
   // ===== 站点身份配置：改名 / 加 X 账号只改这里 =====
   const SITE = {
-    name: "youjunhui",          // 站点署名
-    x: "",                       // TODO: 填 X 手柄（不带 @），如 "youjunhui"，留空则不显示 X 图标
+    name: "youjunhui",           // 站点署名
+    x: "",                       // TODO: 填 X 手柄（不带 @），留空则不显示
     github: "youjunhui-sky",
-    email: "",                   // 想放邮箱就填，留空不显示
+    email: "",                   // 留空不显示
   };
   // ================================================
 
@@ -186,7 +168,7 @@
   render(document.getElementById("socials2"), links);
 
   for (const el of document.querySelectorAll("#who, .fwho")) el.textContent = SITE.name;
-  document.title = SITE.name + " — 数据工程 × 全栈";
+  document.title = SITE.name + " — 一个人，几个 agent，把事办成";
   document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>
