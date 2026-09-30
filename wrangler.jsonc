@@ -1,7 +1,7 @@
 {
   // 个人名片站 — Cloudflare Workers 静态资产部署
   // push main → GitHub Actions → wrangler deploy（需配 CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secrets）
-  "name": "youjunhui",
+  "name": "iam",
   "compatibility_date": "2026-09-30",
   "workers_dev": true,
   "assets": {

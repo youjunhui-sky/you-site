@@ -2,9 +2,9 @@
 
 极简单页名片站：数据工程 × 全栈。纯静态单 HTML，零构建。
 
-- 线上：`https://youjunhui.<subdomain>.workers.dev`（部署后见回执）
-- 仓库：`github.com/youjunhui-sky/you-site`
-- 部署：push main → GitHub Actions → `wrangler deploy`（Workers 静态资产）
+- 线上：`https://iam.youjunhui.workers.dev`（子域改后）· 过渡期 `https://iam.youjh120608.workers.dev`
+- 仓库：`github.com/youjunhui-sky/you-site`（public）
+- 部署：push main → GitHub Actions → `wrangler deploy`（worker 名 `iam`）+ 双地址探活
 
 ## 改身份（名字 / X 账号）
 
