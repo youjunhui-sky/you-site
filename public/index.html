@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>youjunhui — 数据工程 × 全栈</title>
+<meta name="description" content="数据工程 × 全栈开发者。把业务做成看得见的数据：跨境电商数据中台、运营预警看板、B2B 全栈站点。">
+<meta property="og:title" content="youjunhui — 数据工程 × 全栈">
+<meta property="og:description" content="把业务做成看得见的数据。跨境电商数据中台 · 运营看板 · 全栈站点。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c1917'/%3E%3Ctext x='32' y='43' font-family='ui-monospace,monospace' font-size='32' font-weight='700' fill='%23fafaf9' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#fafaf9; --fg:#1c1917; --muted:#78716c; --line:#e7e5e4;
+    --card:#ffffff; --accent:#2563eb; --ok:#16a34a; --warn:#d97706;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0c0a09; --fg:#fafaf9; --muted:#a8a29e; --line:#292524;
+      --card:#151210; --accent:#60a5fa; --ok:#4ade80; --warn:#fbbf24; }
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--fg); line-height:1.65;
+    font-size:16px;
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+
+  /* header */
+  header{ padding:28px 0 0; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; }
+  .mark{ width:34px; height:34px; border-radius:9px; background:var(--fg); color:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-weight:700; font-size:17px; }
+  nav a{ text-decoration:none; color:var(--muted); font-size:14px; margin-left:20px; }
+  nav a:hover{ color:var(--fg); }
+
+  /* hero */
+  .hero{ padding:72px 0 56px; }
+  .avatar{ width:76px; height:76px; border-radius:50%; background:var(--fg); color:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:32px; font-weight:700;
+    margin-bottom:24px; }
+  h1{ font-size:34px; font-weight:700; letter-spacing:-.02em; line-height:1.2; }
+  .tagline{ margin-top:10px; font-size:17px; color:var(--muted); }
+  .now{ margin-top:14px; font-size:14px; color:var(--muted); }
+  .now .dot{ color:var(--ok); }
+  .socials{ margin-top:22px; display:flex; gap:10px; }
+  .socials a{ width:38px; height:38px; border:1px solid var(--line); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; color:var(--muted);
+    transition:border-color .15s, color .15s; }
+  .socials a:hover{ border-color:var(--fg); color:var(--fg); }
+  .socials svg{ width:18px; height:18px; fill:currentColor; }
+
+  /* section */
+  h2{ font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:18px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  section{ padding:8px 0 48px; }
+
+  /* projects */
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .grid{ grid-template-columns:1fr; } }
+  .card{ border:1px solid var(--line); background:var(--card); border-radius:14px; padding:20px;
+    transition:border-color .15s; }
+  .card:hover{ border-color:var(--muted); }
+  .card .top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+  .card h3{ font-size:16px; font-weight:650; letter-spacing:-.01em; }
+  .status{ font-size:11px; white-space:nowrap; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .status.run{ color:var(--ok); } .status.beta{ color:var(--warn); } .status.plan{ color:var(--muted); }
+  .card p{ margin-top:8px; font-size:14px; color:var(--muted); }
+  .tags{ margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
+  .tags span{ font-size:11.5px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:2px 9px; }
+  a.card{ text-decoration:none; display:block; }
+
+  /* stack */
+  .stack{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px;
+    color:var(--muted); line-height:2; }
+  .stack b{ color:var(--fg); font-weight:600; }
+
+  /* footer */
+  footer{ border-top:1px solid var(--line); padding:26px 0 40px; margin-top:16px;
+    display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+  footer, footer a{ font-size:13px; color:var(--muted); text-decoration:none; }
+  footer a:hover{ color:var(--fg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="nav">
+      <div class="mark">Y</div>
+      <nav>
+        <a href="#projects">项目</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="avatar">Y</div>
+    <h1 id="who">youjunhui</h1>
+    <p class="tagline">数据工程 × 全栈 —— 把业务做成看得见的数据。</p>
+    <p class="now"><span class="dot">●</span> 现在：跨境电商数据基建 · 在 X 记录构建过程</p>
+    <div class="socials" id="socials"></div>
+  </div>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="top"><h3>Crosspower 数据中台</h3><span class="status run">● 运行中</span></div>
+        <p>跨境电商运营数据体系：领星 ERP API → PostgreSQL ETL → 实时运营看板，覆盖库存、物流、利润全链路，支撑每日经营决策。</p>
+        <div class="tags"><span>Python</span><span>PostgreSQL</span><span>FastAPI</span><span>ETL</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>业务预警看板</h3><span class="status run">● 运行中</span></div>
+        <p>老板视角的业务预警系统：每日自动识别异常 SKU 与断货风险，按优先级分类，把「该拍板的事」推到眼前。</p>
+        <div class="tags"><span>Data Viz</span><span>Alerting</span><span>决策支持</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>Callsun B2B 官网</h3><span class="status run">● 已上线</span></div>
+        <p>光伏储能企业官网全栈建设：Astro + Cloudflare Workers + D1，内容管理、询盘系统、SEO 一体，线上稳定运行。</p>
+        <div class="tags"><span>Astro</span><span>Cloudflare Workers</span><span>D1</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>多业务数据中枢</h3><span class="status plan">○ 规划中</span></div>
+        <p>把多个业务线的数据收进同一个中枢：统一口径、统一报表、统一决策入口。另：南非零售 POS 私有化方案设计中。</p>
+        <div class="tags"><span>Data Hub</span><span>POS</span><span>方案设计</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Stack</h2>
+    <p class="stack"><b>Python</b> · SQL · FastAPI · PostgreSQL · <b>Astro</b> · Cloudflare Workers · Tailwind · Git</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="tagline" style="margin-top:0">找我聊数据、跨境电商、或者一起做点东西 —— X 上私信最快。</p>
+    <div class="socials" id="socials2" style="margin-top:16px"></div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr"></span> <span class="fwho">youjunhui</span></span>
+    <a href="https://github.com/youjunhui-sky/you-site" target="_blank" rel="noopener">source</a>
+  </footer>
+
+</div>
+
+<script>
+  // ===== 站点身份配置：改名 / 加 X 账号只改这里 =====
+  const SITE = {
+    name: "youjunhui",          // 站点署名
+    x: "",                       // TODO: 填 X 手柄（不带 @），如 "youjunhui"，留空则不显示 X 图标
+    github: "youjunhui-sky",
+    email: "",                   // 想放邮箱就填，留空不显示
+  };
+  // ================================================
+
+  const icons = {
+    x: '<svg viewBox="0 0 24 24" aria-label="X"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+    github: '<svg viewBox="0 0 16 16" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" aria-label="Email"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8.6L3.4 6v12h17.2V6L12 12.6zM4.9 6h14.2L12 10.7 4.9 6z"/></svg>',
+  };
+
+  function render(el, links){
+    el.innerHTML = links.map(([href, svg, label]) =>
+      `<a href="${href}" target="_blank" rel="noopener" aria-label="${label}">${svg}</a>`).join("");
+  }
+  const links = [];
+  if (SITE.x)      links.push(["https://x.com/" + SITE.x, icons.x, "X"]);
+  if (SITE.github) links.push(["https://github.com/" + SITE.github, icons.github, "GitHub"]);
+  if (SITE.email)  links.push(["mailto:" + SITE.email, icons.mail, "Email"]);
+  render(document.getElementById("socials"), links);
+  render(document.getElementById("socials2"), links);
+
+  for (const el of document.querySelectorAll("#who, .fwho")) el.textContent = SITE.name;
+  document.title = SITE.name + " — 数据工程 × 全栈";
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
