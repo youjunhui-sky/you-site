@@ -28,3 +28,15 @@ jobs:
             exit 0
           fi
           npx wrangler deploy
+
+      - name: Verify live URL
+        if: success()
+        run: |
+          for i in 1 2 3 4 5; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 https://youjunhui.youjh120608.workers.dev/ || true)
+            echo "attempt $i: HTTP $CODE"
+            [ "$CODE" = "200" ] && echo "✅ 线上探活 200" && exit 0
+            sleep 10
+          done
+          echo "❌ 线上探活失败（部署可能已成功但 DNS/网络未就绪）"
+          exit 1
