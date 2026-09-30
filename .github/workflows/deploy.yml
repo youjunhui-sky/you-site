@@ -32,14 +32,13 @@ jobs:
       - name: Verify live URL
         if: success()
         run: |
-          # 新子域 youjunhui 优先（东家 dashboard 改子域后生效），旧子域作过渡回退
-          for HOST in iam.youjunhui.workers.dev iam.youjh120608.workers.dev; do
-            for i in 1 2 3; do
-              CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 https://$HOST/ || true)
-              echo "$HOST attempt $i: HTTP $CODE"
-              [ "$CODE" = "200" ] && echo "✅ 线上探活 200 @ $HOST" && exit 0
-              sleep 8
-            done
+          # 主地址；旧子域已作废不再兑底
+          HOST=iam.youjunhui.workers.dev
+          for i in 1 2 3; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 https://$HOST/ || true)
+            echo "$HOST attempt $i: HTTP $CODE"
+            [ "$CODE" = "200" ] && echo "✅ 线上探活 200 @ $HOST" && exit 0
+            sleep 8
           done
-          echo "❌ 两个地址均探活失败"
+          echo "❌ 线上探活失败"
           exit 1

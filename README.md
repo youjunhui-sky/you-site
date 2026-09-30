@@ -4,7 +4,7 @@
 
 - 线上：`https://iam.youjunhui.workers.dev`（子域改后）· 过渡期 `https://iam.youjh120608.workers.dev`
 - 仓库：`github.com/youjunhui-sky/you-site`（public）
-- 部署：push main → GitHub Actions → `wrangler deploy`（worker 名 `iam`）+ 双地址探活
+- 部署：push main → GitHub Actions → `wrangler deploy`（worker 名 `iam`）+ 线上探活
 
 ## 改身份（名字 / X 账号）
 
