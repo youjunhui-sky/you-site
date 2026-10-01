@@ -172,7 +172,7 @@
     var sid = sessionStorage.getItem(SID_KEY);
     if (!sid) {
       sid = crypto.randomUUID ? crypto.randomUUID()
-        : Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+        : Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2, "0")).join("");
       sessionStorage.setItem(SID_KEY, sid);
     }
     var send = function(payload){

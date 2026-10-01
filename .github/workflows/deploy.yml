@@ -46,7 +46,7 @@ jobs:
 
           T=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 -X POST https://$HOST/api/track \
             -H 'content-type: application/json' -H 'user-agent: smoke-check' \
-            -d "{\"t\":\"visit\",\"sid\":\"smoke-$GITHUB_RUN_ID\"}")
+            -d "{\"t\":\"visit\",\"sid\":\"$GITHUB_RUN_ID\"}")
           echo "track: HTTP $T (期望 204)"
           A0=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://$HOST/admin")
           echo "admin 无key: HTTP $A0 (期望 401)"
