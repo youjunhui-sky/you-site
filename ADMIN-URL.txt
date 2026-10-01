@@ -1,0 +1,5 @@
+后台地址（含密钥，勿外传）
+
+https://iam.youjunhui.workers.dev/admin?key=2f925688b8f8079f22080b72e114c089e23fe0682e171df2
+
+想换 key：跟我说一声即可。

@@ -26,7 +26,7 @@ jobs:
             echo "== 创建 D1 数据库 =="
             OUT=$(npx wrangler d1 create you-site-analytics 2>&1) || { echo "$OUT"; exit 1; }
             echo "$OUT"
-            DBID=$(echo "$OUT" | grep 'database_id' | grep -oE '[0-9a-f]{32}' | head -1)
+            DBID=$(echo "$OUT" | grep 'database_id' | grep -oE '[0-9a-f-]{36}' | head -1)
             if [ -z "$DBID" ]; then echo "❌ 未能解析 database_id"; exit 1; fi
             sed -i "s/TO_BE_FILLED/$DBID/" wrangler.jsonc
             git config user.name "bootstrap-bot"
