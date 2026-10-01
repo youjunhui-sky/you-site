@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "== 清理冒烟噪音（sid 无连字符 = 部署冒烟；真实访客是 UUID/hex）=="
           npx wrangler d1 execute you-site-analytics --remote --file=db/cleanup-smoke.sql --yes
-          echo "== D1 原始数据（清理后应为空）==""
+          echo "== D1 原始数据（清理后应为空）=="
           npx wrangler d1 execute you-site-analytics --remote --json \
             --command "SELECT type, COUNT(*) n FROM events GROUP BY type" | jq '.[0].results'
           echo "== D1 最近 3 条 =="
