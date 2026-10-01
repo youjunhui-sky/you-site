@@ -44,10 +44,15 @@ jobs:
           done
           [ "$CODE" = "200" ] || { echo "❌ 主页探活失败"; exit 1; }
 
-          T=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 -X POST https://$HOST/api/track \
-            -H 'content-type: application/json' \
-            -d "{\"t\":\"visit\",\"sid\":\"$GITHUB_RUN_ID\"}")
-          echo "track: HTTP $T (期望 204)"
+          T=000
+          for i in 1 2 3 4; do
+            T=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 -X POST https://$HOST/api/track \
+              -H 'content-type: application/json' \
+              -d "{\"t\":\"visit\",\"sid\":\"$GITHUB_RUN_ID\"}")
+            echo "track: HTTP $T (期望 204, attempt $i)"
+            [ "$T" = "204" ] && break
+            sleep 12
+          done
           A0=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://$HOST/admin")
           echo "admin 无key: HTTP $A0 (期望 401)"
           A1=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://$HOST/admin?key=$ADMIN_KEY_SEED")
