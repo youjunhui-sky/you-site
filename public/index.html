@@ -74,6 +74,8 @@
     border-bottom:1px solid var(--line); flex-wrap:wrap; }
   .row .nm{ font-weight:600; font-size:15px; white-space:nowrap; }
   .row .ds{ color:var(--muted); font-size:14px; flex:1; min-width:220px; }
+  .row a{ color:inherit; text-decoration:none; border-bottom:1px dashed var(--line); }
+  .row a:hover{ border-bottom-color:var(--fg); }
   .row .st{ font-size:11px; white-space:nowrap;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
   .st.run{ color:var(--ok); } .st.live{ color:var(--ok); } .st.wip{ color:var(--warn); }
@@ -97,6 +99,7 @@
       <nav>
         <a href="#how">风格</a>
         <a href="#built">建过的</a>
+        <a href="#now">现在</a>
         <a href="#contact">联系</a>
       </nav>
     </div>
@@ -125,9 +128,27 @@
     <div class="list">
       <div class="row"><span class="nm">Crosspower 数据中台</span><span class="ds">电商全链路数据：ETL → PostgreSQL → 实时经营看板</span><span class="st run">● 生产</span></div>
       <div class="row"><span class="nm">经营预警看板</span><span class="ds">每天把「该拍板的事」推到眼前</span><span class="st run">● 生产</span></div>
-      <div class="row"><span class="nm">Callsun B2B 官网</span><span class="ds">光伏 B2B 独立站：询盘 / CRM / SEO 一体</span><span class="st live">● 上线</span></div>
+      <div class="row"><span class="nm"><a href="https://callsunenergy.com" target="_blank" rel="noopener">Callsun B2B 官网 ↗</a></span><span class="ds">光伏 B2B 独立站：询盘 / CRM / SEO 一体</span><span class="st live">● 上线</span></div>
       <div class="row"><span class="nm">私域 analytics + CRM</span><span class="ds">独立站访客数据回流，业务统计自建闭环</span><span class="st run">● 生产</span></div>
       <div class="row"><span class="nm">南非超市 POS 方案</span><span class="ds">私有化部署方案设计中</span><span class="st wip">○ 进行中</span></div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <h2>Why trust this page</h2>
+    <div class="plines">
+      <div class="pline"><b>本站零 Cookie、零第三方跟踪</b><span>统计自托管，访客数据不出自己的服务器</span></div>
+      <div class="pline"><b>说的都是跑着的系统</b><span>标「生产/上线」的都在真实业务运行，入口能给的都给了</span></div>
+      <div class="pline"><b>全站源码公开</b><span>含统计后台 —— <a href="https://github.com/youjunhui-sky/you-site" target="_blank" rel="noopener">github.com/youjunhui-sky/you-site</a></span></div>
+    </div>
+  </section>
+
+  <section id="now">
+    <h2>Now</h2>
+    <div class="plines">
+      <div class="pline"><b><span class="dot">●</span> 接活中</b><span>数据看板 / 独立站 / AI 工作流自动化</span></div>
+      <div class="pline"><b>GMT+8</b><span>工作日消息 24 小时内必回</span></div>
+      <div class="pline"><b>合作方式</b><span>小单先跑通，再谈长期</span></div>
     </div>
   </section>
 
@@ -138,13 +159,75 @@
   </section>
 
   <footer>
-    <span>© <span id="yr"></span> <span class="fwho">youjunhui</span></span>
+    <span>© <span id="yr"></span> <span class="fwho">youjunhui</span> · 无 Cookie · 不跟踪个人</span>
     <a href="https://github.com/youjunhui-sky/you-site" target="_blank" rel="noopener">source</a>
   </footer>
 
 </div>
 
 <script>
+  // ===== 自托管匿名统计：无 Cookie，数据进自家 D1 =====
+  (function(){
+    var SID_KEY = "ysid";
+    var sid = sessionStorage.getItem(SID_KEY);
+    if (!sid) {
+      sid = crypto.randomUUID ? crypto.randomUUID()
+        : Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem(SID_KEY, sid);
+    }
+    var send = function(payload){
+      try {
+        payload.sid = sid;
+        payload.ref = (function(){ try {
+          var r = document.referrer && new URL(document.referrer).hostname;
+          return (r && r !== location.hostname) ? r.slice(0,100) : "";
+        } catch(e){ return ""; } })();
+        payload.w = innerWidth; payload.h = innerHeight;
+        navigator.sendBeacon("/api/track", new Blob([JSON.stringify(payload)], {type:"application/json"}));
+      } catch(e){}
+    };
+
+    // 爬虫/预览器不打点（服务端也有一道防线）
+    if (!/bot|crawl|spider|preview|headless/i.test(navigator.userAgent)) {
+      send({ t: "visit" });
+
+      // 区块曝光：IntersectionObserver，先序去重
+      var seen = {};
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting && !seen[en.target.id]) {
+            seen[en.target.id] = 1;
+            send({ t: "sec", el: en.target.id });
+          }
+        });
+      }, { threshold: 0.5 });
+      for (var id of ["how", "built", "proof", "now", "contact"]) {
+        var el = document.getElementById(id);
+        if (el) io.observe(el);
+      }
+
+      // 点击：页内 click / 外链 out（外链不拦截， Beacon 天然兼容跳转）
+      document.addEventListener("click", function(ev){
+        var a = ev.target.closest("a,button,[data-el]");
+        if (!a) return;
+        var label = a.getAttribute("data-el")
+          || String(a.getAttribute("href")||"").split("//").pop().slice(0,48)
+          || (a.id || a.tagName.toLowerCase());
+        var external = a.tagName === "A" && a.hostname && a.hostname !== location.hostname;
+        send({ t: external ? "out" : "click", el: label });
+      }, true);
+
+      // 停留时长：每 10s 一个心跳；关页/跳走用 sendBeacon 兜底
+      var acc = 0;
+      var hb = function(){ acc += 10000; send({ t: "hb", ms: 10000 }); };
+      var timer = setInterval(hb, 10000);
+      addEventListener("pagehide", function(){
+        clearInterval(timer);
+        if (acc > 0) send({ t: "hb", ms: acc });
+      });
+    }
+  })();
+
   // ===== 站点身份配置：改名 / 加 X 账号只改这里 =====
   const SITE = {
     name: "youjunhui",           // 站点署名
