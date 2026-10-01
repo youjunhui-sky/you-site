@@ -39,7 +39,7 @@ async function handleTrack(request, env) {
   const ua = request.headers.get("user-agent") || "";
   // 爬虫/预览器/自检流量静默吞掉
   if (!ua || /bot|crawl|spider|slurp|preview|curl|wget|python|headless|monitor/i.test(ua))
-    return json({ ok: true });
+    return new Response(null, { status: 204 });
 
   let body;
   try {
