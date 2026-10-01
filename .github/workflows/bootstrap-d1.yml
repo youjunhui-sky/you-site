@@ -1,0 +1,61 @@
+name: Bootstrap D1 (one-shot)
+
+# 一次性引导：建 D1 库 → 填 database_id → 灌 schema → 部署 → 配 ADMIN_KEY
+# 跑法：gh workflow run bootstrap-d1.yml（或 Actions 页面手动触发）
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create D1, fill id, apply schema, deploy, set ADMIN_KEY
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_KEY_SEED: ${{ secrets.ADMIN_KEY_SEED }}
+        run: |
+          set -e
+          if grep -q TO_BE_FILLED wrangler.jsonc; then
+            echo "== 创建 D1 数据库 =="
+            OUT=$(npx wrangler d1 create you-site-analytics 2>&1) || { echo "$OUT"; exit 1; }
+            echo "$OUT"
+            DBID=$(echo "$OUT" | grep 'database_id' | grep -oE '[0-9a-f]{32}' | head -1)
+            if [ -z "$DBID" ]; then echo "❌ 未能解析 database_id"; exit 1; fi
+            sed -i "s/TO_BE_FILLED/$DBID/" wrangler.jsonc
+            git config user.name "bootstrap-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add wrangler.jsonc
+            git commit -m "bootstrap: fill D1 database_id"
+            git push origin main
+            echo "✅ database_id 已填入并 push"
+          else
+            echo "== database_id 已存在，跳过建库 =="
+          fi
+
+          echo "== 灌 schema（幂等 CREATE IF NOT EXISTS）=="
+          npx wrangler d1 execute you-site-analytics --remote --file=db/schema.sql --yes \
+            || npx wrangler d1 execute you-site-analytics --remote --file=db/schema.sql
+
+          echo "== 部署 Worker =="
+          npx wrangler deploy
+
+          echo "== 配置 ADMIN_KEY（Worker secret）=="
+          if [ -n "$ADMIN_KEY_SEED" ]; then
+            printf '%s' "$ADMIN_KEY_SEED" | npx wrangler secret put ADMIN_KEY
+          else
+            echo "❌ ADMIN_KEY_SEED 未配置"; exit 1
+          fi
+
+      - name: Verify
+        run: |
+          sleep 6
+          echo "health: HTTP $(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://iam.youjunhui.workers.dev/api/health)"
+          echo "home:   HTTP $(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://iam.youjunhui.workers.dev/)"
+          echo "track(空body应400): HTTP $(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST https://iam.youjunhui.workers.dev/api/track)"
