@@ -14,7 +14,7 @@
 
 ```js
 const SITE = {
-  name: "youjunhui",    // 站点署名
+  name: "Aaron",        // 站点署名
   x: "",                // X 手柄（不带 @），留空不显示
   github: "youjunhui-sky",
   email: "",            // 留空不显示
