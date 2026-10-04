@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aaron — 把系统建到能跑为止</title>
+<title>Aaron — 独立开发者 · FDE</title>
 <meta name="description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。电商数据基建、经营看板、独立站，全部生产在跑。过程记录在 X。">
-<meta property="og:title" content="Aaron — 把系统建到能跑为止">
+<meta property="og:title" content="Aaron — 独立开发者 · FDE">
 <meta property="og:description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iam.youjunhui.workers.dev/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aaron — 把系统建到能跑为止">
+<meta name="twitter:title" content="Aaron — 独立开发者 · FDE">
 <meta name="twitter:description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。">
 <meta name="theme-color" content="#0a0a0f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c6cff'/%3E%3Ctext x='32' y='44' font-family='ui-monospace,monospace' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3Ey%3C/text%3E%3C/svg%3E">
@@ -68,7 +68,7 @@ main{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 24
 .hero{ padding:36px 0 44px; }
 h1{ font-size:clamp(30px,5vw,44px); font-weight:800; letter-spacing:-.5px; line-height:1.25; }
 .hero h1 em{ font-style:normal; background:linear-gradient(120deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.sub{ margin-top:12px; font-size:15.5px; color:var(--muted); }
+.sub{ margin-top:0; font-size:18px; color:var(--muted); }
 .sub b{ color:var(--fg); font-weight:650; }
 .now{ margin-top:14px; font-size:14.5px; color:var(--muted); }
 .now .dot{ color:var(--ok); animation:pulse 2s ease-in-out infinite; display:inline-block; }
@@ -171,7 +171,6 @@ footer a:hover{ color:var(--fg); }
   </header>
 
   <div class="hero">
-    <h1>把系统建到<em>能跑为止</em>。</h1>
     <p class="sub"><b>独立开发者 · FDE</b> —— 电商数据基建 / 经营看板 / 独立站，全部生产在跑。</p>
     <p class="now"><span class="dot">●</span> 现在：在 X 记录每一单 FDE 的全过程 · <a href="https://x.com/Aaron65119229" target="_blank" rel="noopener">去跟一下 →</a></p>
     <p class="role-line">最近在做 <span id="typed"></span><span class="cursor">|</span></p>
@@ -320,7 +319,7 @@ footer a:hover{ color:var(--fg); }
   render(document.getElementById("socials2"), links);
 
   for (const el of document.querySelectorAll(".fwho")) el.textContent = SITE.name;
-  document.title = SITE.name + " — 把系统建到能跑为止";
+  document.title = SITE.name + " — 独立开发者 · FDE";
   document.getElementById("yr").textContent = new Date().getFullYear();
 
   // ===== 主题：跟随系统 + 手动切换（记忆）+ 丝滑过渡 =====
