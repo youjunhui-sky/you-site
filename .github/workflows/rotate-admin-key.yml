@@ -1,0 +1,32 @@
+name: Rotate ADMIN_KEY
+
+# 一次性轮换：把线上 worker 的 ADMIN_KEY secret 重置为仓库 secret ADMIN_KEY_SEED 的当前值。
+# 用法：先在 Settings → Secrets → Actions 更新 ADMIN_KEY_SEED，再手动触发本 workflow。
+# 日志不输出明文密钥。
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rotate worker secret
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          NEW_KEY: ${{ secrets.ADMIN_KEY_SEED }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "❌ CLOUDFLARE_API_TOKEN 未配置"
+            exit 1
+          fi
+          if [ -z "$NEW_KEY" ]; then
+            echo "❌ ADMIN_KEY_SEED 未配置——先去 Settings → Secrets → Actions 更新它"
+            exit 1
+          fi
+          printf '%s' "$NEW_KEY" | npx wrangler secret put ADMIN_KEY
+          echo "✅ 线上 ADMIN_KEY 已重置为 ADMIN_KEY_SEED 的当前值（明文不出现在日志）"
