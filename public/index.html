@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="youjunhui — 一个人，几个 agent，把事办成">
 <meta name="twitter:description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。">
 <meta name="theme-color" content="#0a0a0f">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c6cff'/%3E%3Ctext x='32' y='43' font-family='ui-monospace,monospace' font-size='32' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c6cff'/%3E%3Ctext x='32' y='44' font-family='ui-monospace,monospace' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3Ey%3C/text%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#0a0a0f; --bg2:#111118; --fg:#e8e8ee; --muted:#9a9aad;
@@ -66,14 +66,7 @@ nav a:hover::after, nav button:hover::after{ width:100%; }
 
 main{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 24px; }
 
-.hero{ padding:40px 0 44px; }
-.avatar{ width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#fff; display:flex; align-items:center; justify-content:center;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:34px; font-weight:700;
-  margin-bottom:20px; cursor:pointer; user-select:none;
-  transition:transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .4s; }
-.avatar:hover{ transform:rotate(-10deg) scale(1.08); box-shadow:0 0 40px -8px var(--accent); }
-.avatar:active{ transform:rotate(360deg) scale(.92); }
+.hero{ padding:36px 0 44px; }
 h1{ font-size:clamp(34px,6vw,50px); font-weight:800; letter-spacing:-.5px; line-height:1.2; }
 .hero h1 em{ font-style:normal; background:linear-gradient(120deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .tagline{ margin-top:12px; font-size:20px; }
@@ -189,7 +182,6 @@ footer a:hover{ color:var(--fg); }
   </header>
 
   <div class="hero">
-    <div class="avatar" id="avatar" title="点一下试试">X</div>
     <h1 id="who">youjunhui</h1>
     <p class="tagline">一个人，几个 agent，<b>把事办成</b>。</p>
     <p class="sub"><b>独立开发者 · FDE</b> —— 电商数据基建 / 经营看板 / 独立站，全部生产在跑。</p>
@@ -397,10 +389,6 @@ footer a:hover{ color:var(--fg); }
       o2.style.transform="translate("+tx*-30+"px,"+ty*-22+"px)";
     },{passive:true});
   }
-
-  // ===== 彩蛋：点头像/Logo 切换主题（带旋转） =====
-  var av = document.getElementById("avatar");
-  if (av) av.onclick = themeBtn.onclick;
 </script>
 </body>
 </html>
