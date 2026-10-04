@@ -133,15 +133,6 @@ section{ scroll-margin-top:80px; padding:12px 0 40px; }
 .st.run, .st.live{ color:var(--ok); border-color:color-mix(in srgb,var(--ok) 40%,transparent); }
 .st.wip{ color:var(--warn); border-color:color-mix(in srgb,var(--warn) 40%,transparent); }
 .card p{ color:var(--muted); font-size:13.5px; }
-/* == projects-media:begin（代表卡缩略图 + 规模标签，样式跟随 .card 变量）== */
-.card.feature{ grid-column:1 / -1; padding:0; overflow:hidden; display:flex; flex-direction:column; }
-.card.feature .thumb{ display:block; width:100%; aspect-ratio:2/1; object-fit:cover; object-position:top; border-bottom:1px solid var(--border); background:var(--bg2); }
-.card.feature .card-body{ padding:18px 20px 20px; }
-.card.feature:hover{ transform:translateY(-4px); border-color:var(--border-hover); box-shadow:0 14px 36px -14px color-mix(in srgb,var(--accent) 30%,transparent); }
-.card.feature .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-.card.feature .tags span{ font-size:12px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; border:1px solid var(--border); border-radius:99px; padding:3px 10px; color:var(--muted); }
-.card.feature .note{ margin-top:12px; font-size:12px; color:var(--muted); }
-/* == projects-media:end == */
 .card a{ color:var(--accent2); font-size:13px; }
 
 /* contact */
@@ -201,22 +192,13 @@ footer a:hover{ color:var(--fg); }
   <section id="built">
     <h2 class="sec-title">在做的事</h2>
     <div class="grid reveal">
-      <div class="card feature">
-        <a href="https://callsunenergy.com" target="_blank" rel="noopener"><img class="thumb" src="assets/callsun.webp" alt="Callsun B2B 官网线上首屏" loading="lazy" width="1280" height="640"></a>
-        <div class="card-body">
-          <div class="card-top"><h3><a href="https://callsunenergy.com" target="_blank" rel="noopener">Callsun B2B 官网 ↗</a></h3><span class="st live">● 上线</span></div>
-          <p>光伏 B2B 独立站：英/德/西三语产品体系，询盘过 Turnstile 进 CRM、飞书实时推送，CMS 自维护。上图为线上实况，点击可访问。</p>
-          <div class="tags"><span>Astro</span><span>Cloudflare Workers</span><span>D1</span><span>Turnstile</span><span>Decap CMS</span></div>
-        </div>
+      <div class="card">
+        <div class="card-top"><h3><a href="https://callsunenergy.com" target="_blank" rel="noopener">Callsun B2B 官网 ↗</a></h3><span class="st live">● 上线</span></div>
+        <p>光伏 B2B 独立站：英/德/西三语产品体系，询盘过 Turnstile 进 CRM、飞书实时推送。</p>
       </div>
-      <div class="card feature">
-        <img class="thumb" src="assets/crosspower-demo.webp" alt="经营预警看板（合成数据演示）" loading="lazy" width="1280" height="640">
-        <div class="card-body">
-          <div class="card-top"><h3>Crosspower 数据中台 + 预警看板</h3><span class="st run">● 生产</span></div>
-          <p>电商全链路数据基建：多平台 API → Python ETL → PostgreSQL → 实时看板 + 老板预警驾驶舱，每天把「该拍板的事」推到眼前。</p>
-          <div class="tags"><span>113 张源表</span><span>712万+ 行</span><span>17 个模块</span><span>18 店铺</span><span>FastAPI · PostgreSQL · MV</span></div>
-          <p class="note">内部运营系统 · 上图为合成数据演示（品牌已脱敏），真实数据不出内网。</p>
-        </div>
+      <div class="card">
+        <div class="card-top"><h3>Crosspower 数据中台 + 预警看板</h3><span class="st run">● 生产</span></div>
+        <p>电商全链路数据基建：18 店铺 / 113 张源表 / 712万+ 行，ETL 入库到实时看板 + 预警驾驶舱，每天把「该拍板的事」推到眼前。</p>
       </div>
       <div class="card">
         <div class="card-top"><h3>私域 analytics + CRM</h3><span class="st run">● 生产</span></div>
