@@ -1,6 +1,8 @@
-# you-site — 个人名片站
+# you-site — 个人主页
 
-极简单页名片站：数据工程 × 全栈。纯静态单 HTML，零构建。
+独立开发者 · FDE 的对外门面：X 引流 → 本站展示工作成果 → X 私信接单。
+内容结构参考 antfu.me（第一人称叙述）与 brianlovin.com（可扫读的项目列表）。
+纯静态单 HTML，零构建。
 
 - 线上：`https://iam.youjunhui.workers.dev`（子域改后）· 过渡期 `https://iam.youjh120608.workers.dev`
 - 仓库：`github.com/youjunhui-sky/you-site`（public）

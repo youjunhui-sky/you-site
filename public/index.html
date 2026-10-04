@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>youjunhui — 一个人，几个 agent，把事办成</title>
-<meta name="description" content="一个人 + 几个 AI agent = 一个团队的产出。电商数据基建、经营看板、独立站建站，全部生产在跑。">
+<meta name="description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。电商数据基建、经营看板、独立站，全部生产在跑。过程记录在 X。">
 <meta property="og:title" content="youjunhui — 一个人，几个 agent，把事办成">
-<meta property="og:description" content="一个人 + 几个 AI agent = 一个团队的产出。">
+<meta property="og:description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iam.youjunhui.workers.dev/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="youjunhui — 一个人，几个 agent，把事办成">
-<meta name="twitter:description" content="一个人 + 几个 AI agent = 一个团队的产出。">
+<meta name="twitter:description" content="独立开发者 · FDE。一个人 + 几个 AI agent = 一个团队的产出。">
 <meta name="theme-color" content="#0a0a0f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c6cff'/%3E%3Ctext x='32' y='43' font-family='ui-monospace,monospace' font-size='32' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EX%3C/text%3E%3C/svg%3E">
 <style>
@@ -65,7 +65,6 @@ nav a::after, nav button::after{
   background:var(--accent); transition:width .28s cubic-bezier(.4,0,.2,1);
 }
 nav a:hover, nav button:hover{ color:var(--fg); }
-nav a:hover::after, nav button::after:hover{ width:100%; }
 nav a:hover::after, nav button:hover::after{ width:100%; }
 #themeBtn{ font-size:15px; line-height:1; padding:2px 4px; }
 
@@ -84,8 +83,11 @@ h1{ font-size:clamp(34px,6vw,50px); font-weight:800; letter-spacing:-.5px; line-
 .tagline{ margin-top:12px; font-size:20px; }
 .tagline b{ font-weight:700; background:linear-gradient(110deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .sub{ margin-top:10px; font-size:15.5px; color:var(--muted); }
+.sub b{ color:var(--fg); font-weight:650; }
 .now{ margin-top:16px; font-size:14.5px; color:var(--muted); }
 .now .dot{ color:var(--ok); animation:pulse 2s ease-in-out infinite; display:inline-block; }
+.now a{ color:var(--accent2); }
+.now a:hover{ text-decoration:underline; }
 .role-line{ margin-top:16px; font-size:17px; }
 .role-line .cursor{ display:inline-block; width:2px; height:1.05em; background:var(--accent2); vertical-align:-2px; margin-left:2px; animation:blink 1s step-end infinite; }
 @keyframes blink{ 50%{opacity:0} }
@@ -117,7 +119,14 @@ section{ scroll-margin-top:80px; padding:14px 0 48px; }
   .now .dot, .scroll-hint{ animation:none; }
 }
 
-/* 工作风格 */
+/* 第一人称叙述（antfu 式行文：链接织进句子） */
+.prose{ display:grid; gap:14px; max-width:660px; }
+.prose p{ font-size:15.5px; line-height:1.95; }
+.prose b{ font-weight:650; }
+.prose a{ color:var(--accent2); border-bottom:1px dashed color-mix(in srgb, var(--accent2) 50%, transparent); transition:border-color .2s; }
+.prose a:hover{ border-bottom-style:solid; border-color:var(--accent2); }
+
+/* 合作方式 */
 .plines{ display:grid; gap:10px; }
 .pline{ display:flex; gap:14px; font-size:15px; align-items:baseline; flex-wrap:wrap;
   padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--card);
@@ -151,7 +160,7 @@ section{ scroll-margin-top:80px; padding:14px 0 48px; }
 /* == projects-media:end == */
 .card a{ color:var(--accent2); font-size:13px; }
 
-/* proof / now / contact */
+/* contact */
 .contact-p{ font-size:15px; color:var(--muted); }
 .contact-p b{ color:var(--fg); font-weight:650; }
 
@@ -177,9 +186,9 @@ footer a:hover{ color:var(--fg); }
     <div class="nav">
       <div class="mark" id="mark" title="点我试试">X</div>
       <nav>
-        <a href="#how">风格</a>
-        <a href="#built">建过的</a>
-        <a href="#now">现在</a>
+        <a href="#about">关于</a>
+        <a href="#built">在做的事</a>
+        <a href="#fde">FDE</a>
         <a href="#contact">联系</a>
         <button id="themeBtn" aria-label="切换明暗主题">☾</button>
       </nav>
@@ -190,30 +199,32 @@ footer a:hover{ color:var(--fg); }
     <div class="avatar" id="avatar" title="点一下试试">X</div>
     <h1 id="who">youjunhui</h1>
     <p class="tagline">一个人，几个 agent，<b>把事办成</b>。</p>
-    <p class="sub">电商数据基建 · 经营看板 · 独立站 —— 全部生产在跑，不停留在 PPT。</p>
-    <p class="now"><span class="dot">●</span> 现在：在 X 记录 AI 原生的工作方式</p>
-    <p class="role-line">在深耕 <span id="typed"></span><span class="cursor">|</span></p>
+    <p class="sub"><b>独立开发者 · FDE</b> —— 电商数据基建 / 经营看板 / 独立站，全部生产在跑。</p>
+    <p class="now"><span class="dot">●</span> 现在：在 X 记录每一单 FDE 的全过程 · <a href="https://x.com/Aaron65119229" target="_blank" rel="noopener">去跟一下 →</a></p>
+    <p class="role-line">最近在做 <span id="typed"></span><span class="cursor">|</span></p>
     <div class="socials" id="socials"></div>
     <div class="scroll-hint">↓ 往下看</div>
   </div>
 
-  <section id="how">
-    <h2>How I Work</h2>
-    <div class="plines reveal">
-      <div class="pline"><b>Agent 干活，我拍板</b><span>AI 跑日常，人握最终决定权</span></div>
-      <div class="pline"><b>数据说话</b><span>能量化的不拍脑袋</span></div>
-      <div class="pline"><b>件件闭环</b><span>没有结果不销单，没有证据不开口</span></div>
+  <section id="about">
+    <h2 class="sec-title">写在前面</h2>
+    <div class="prose">
+      <p>你好，我是 youjunhui。我在跨境电商行业做数据与系统 —— 从多平台 API 采集、ETL、数据仓库，到实时经营看板和预警系统。</p>
+      <p>现在，这些活我带着几个 AI agent 一起干：<b>agent 负责写代码、跑任务，我负责拆解需求、验证结果、拍板上线</b>。一个人，跑出一支团队的产出。</p>
+      <p>我的交付方式是 <b>FDE（Forward Deployed Engineer，随行工程师）</b>：不是远程甩一份方案就完事，而是直接进入你的业务现场 —— 摸清真实流程，用最快速度把系统建起来、跑进生产，直到它自己能运转。<a href="https://callsunenergy.com" target="_blank" rel="noopener">Callsun 独立站</a>和下面的 Crosspower 数据中台，都是这么交付的。</p>
+      <p>每一单踩过的坑、跑通的方案、复盘的结论，我都记在 <a href="https://x.com/Aaron65119229" target="_blank" rel="noopener">X</a> 上。想看我做事靠不靠谱，去那里翻一翻，比这份页面上的任何话都直接。</p>
+      <p>不写代码的时候，我在琢磨怎么让 agent 把更多重复劳动接过去，顺便研究跨境电商的新玩法。</p>
     </div>
   </section>
 
   <section id="built">
-    <h2>Built</h2>
+    <h2 class="sec-title">在做的事</h2>
     <div class="grid reveal">
       <div class="card feature">
         <a href="https://callsunenergy.com" target="_blank" rel="noopener"><img class="thumb" src="assets/callsun.webp" alt="Callsun B2B 官网线上首屏" loading="lazy" width="1280" height="640"></a>
         <div class="card-body">
           <div class="card-top"><h3><a href="https://callsunenergy.com" target="_blank" rel="noopener">Callsun B2B 官网 ↗</a></h3><span class="st live">● 上线</span></div>
-          <p>光伏 B2B 独立站：英/德/西三语产品体系、询盘 + Turnstile 防护、线索自动进 CRM 并飞书实时推送、CMS 自维护 —— 上图为线上实况，点击可访问。</p>
+          <p>光伏 B2B 独立站：英/德/西三语产品体系，询盘过 Turnstile 进 CRM、飞书实时推送，CMS 自维护。上图为线上实况，点击可访问。</p>
           <div class="tags"><span>Astro</span><span>Cloudflare Workers</span><span>D1</span><span>Turnstile</span><span>Decap CMS</span></div>
         </div>
       </div>
@@ -221,48 +232,40 @@ footer a:hover{ color:var(--fg); }
         <img class="thumb" src="assets/crosspower-demo.webp" alt="经营预警看板（合成数据演示）" loading="lazy" width="1280" height="640">
         <div class="card-body">
           <div class="card-top"><h3>Crosspower 数据中台 + 预警看板</h3><span class="st run">● 生产</span></div>
-          <p>电商全链路数据基建：多平台 API → Python ETL → PostgreSQL → 实时看板 + 老板预警驾驶舱（日销波动 / FBA 断货 / 滞销 / 采购交期六维预警），每天把「该拍板的事」推到眼前。</p>
+          <p>电商全链路数据基建：多平台 API → Python ETL → PostgreSQL → 实时看板 + 老板预警驾驶舱，每天把「该拍板的事」推到眼前。</p>
           <div class="tags"><span>113 张源表</span><span>712万+ 行</span><span>17 个模块</span><span>18 店铺</span><span>FastAPI · PostgreSQL · MV</span></div>
           <p class="note">内部运营系统 · 上图为合成数据演示（品牌已脱敏），真实数据不出内网。</p>
         </div>
       </div>
       <div class="card">
         <div class="card-top"><h3>私域 analytics + CRM</h3><span class="st run">● 生产</span></div>
-        <p>独立站访客数据回流，业务统计自建闭环</p>
+        <p>独立站访客数据回流，统计与 CRM 自建闭环</p>
       </div>
       <div class="card">
         <div class="card-top"><h3>南非超市 POS 方案</h3><span class="st wip">○ 进行中</span></div>
-        <p>私有化部署方案设计中</p>
+        <p>私有化部署，方案设计中</p>
       </div>
     </div>
   </section>
 
-  <section id="proof">
-    <h2>Why trust this page</h2>
+  <section id="fde">
+    <h2 class="sec-title">FDE，怎么合作</h2>
     <div class="plines reveal">
-      <div class="pline"><b>本站零 Cookie、零第三方跟踪</b><span>统计自托管，访客数据不出自己的服务器</span></div>
-      <div class="pline"><b>说的都是跑着的系统</b><span>标「生产/上线」的都在真实业务运行，入口能给的都给了</span></div>
-      <div class="pline"><b>全站源码公开</b><span>含统计后台 —— <a href="https://github.com/youjunhui-sky/you-site" target="_blank" rel="noopener">github.com/youjunhui-sky/you-site</a></span></div>
-    </div>
-  </section>
-
-  <section id="now">
-    <h2>Now</h2>
-    <div class="plines reveal">
-      <div class="pline"><b><span class="dot">●</span> 接活中</b><span>数据看板 / 独立站 / AI 工作流自动化</span></div>
-      <div class="pline"><b>GMT+8</b><span>工作日消息 24 小时内必回</span></div>
-      <div class="pline"><b>合作方式</b><span>小单先跑通，再谈长期</span></div>
+      <div class="pline"><b>到现场去</b><span>FDE 的本分：不远程甩文档，直接进你的业务流程，把系统建到能跑</span></div>
+      <div class="pline"><b>小步快跑</b><span>先挑一个最小场景跑通上线，看到真实效果，再谈长期</span></div>
+      <div class="pline"><b>适合的事</b><span>经营看板 / 独立站 / AI 工作流自动化</span></div>
+      <div class="pline"><b>怎么开始</b><span>X 私信，说清楚你卡在哪 —— 工作日消息 24 小时内必回</span></div>
     </div>
   </section>
 
   <section id="contact">
-    <h2>Contact</h2>
-    <p class="contact-p" style="margin-bottom:16px">聊数据、AI 工作流、或者一起做点东西 —— <b>X 上私信最快</b>。</p>
+    <h2 class="sec-title">找到我</h2>
+    <p class="contact-p" style="margin-bottom:16px">聊数据、AI 工作流，或者想让我到你的现场解决一个具体问题 —— <b>X 私信最快</b>。</p>
     <div class="socials" id="socials2" style="margin-top:0"></div>
   </section>
 
   <footer>
-    <span>© <span id="yr"></span> <span class="fwho">youjunhui</span> · 无 Cookie · 不跟踪个人</span>
+    <span>© <span id="yr"></span> <span class="fwho">youjunhui</span> · 本站零 Cookie · 统计自托管，不跟踪个人</span>
     <a href="https://github.com/youjunhui-sky/you-site" target="_blank" rel="noopener">source</a>
   </footer>
 
@@ -302,7 +305,7 @@ footer a:hover{ color:var(--fg); }
           }
         });
       }, { threshold: 0.5 });
-      for (var id of ["how", "built", "proof", "now", "contact"]) {
+      for (var id of ["about", "built", "fde", "contact"]) {
         var el = document.getElementById(id);
         if (el) io.observe(el);
       }
@@ -377,14 +380,14 @@ footer a:hover{ color:var(--fg); }
   if (mark) mark.onclick = themeBtn.onclick;
 
   // ===== 滚动渐显 =====
-  var reveals = document.querySelectorAll(".plines, .grid");
+  var reveals = document.querySelectorAll(".plines, .grid, .prose");
   var rio = new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("on"); rio.unobserve(e.target); } });
   }, { threshold: .12 });
   for (var r of reveals){ r.classList.add("reveal"); rio.observe(r); }
 
   // ===== 打字机轮播（真实方向） =====
-  var words=["电商数据基建","经营看板","独立站","AI 原生工作方式"];
+  var words=["电商数据基建","经营看板","独立站","FDE 现场交付","AI 工作流自动化"];
   var tEl=document.getElementById("typed");
   var wi=0,ci=0,del=false;
   (function type(){
