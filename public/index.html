@@ -150,6 +150,8 @@ section{ scroll-margin-top:80px; padding:12px 0 40px; }
 /* contact */
 .contact-p{ font-size:15px; color:var(--muted); }
 .contact-p b{ color:var(--fg); font-weight:650; }
+.contact-p a{ color:var(--accent2); border-bottom:1px dashed color-mix(in srgb, var(--accent2) 50%, transparent); }
+.contact-p a:hover{ border-bottom-style:solid; border-color:var(--accent2); }
 
 footer{ border-top:1px solid var(--border); padding:28px 0 44px; margin-top:16px;
   display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
@@ -244,7 +246,7 @@ footer a:hover{ color:var(--fg); }
 
   <section id="contact">
     <h2 class="sec-title">找到我</h2>
-    <p class="contact-p" style="margin-bottom:16px">聊数据、AI 工作流，或者想让我到你的现场解决一个具体问题 —— <b>X 私信最快</b>。</p>
+    <p class="contact-p" style="margin-bottom:16px">聊数据、AI 工作流，或者想让我到你的现场解决一个具体问题 —— <b>X 私信最快</b>，或发邮件到 <a href="mailto:youjh120608@gmail.com">youjh120608@gmail.com</a>。</p>
     <div class="socials" id="socials2" style="margin-top:0"></div>
   </section>
 
@@ -319,7 +321,7 @@ footer a:hover{ color:var(--fg); }
     name: "youjunhui",           // 站点署名
     x: "Aaron65119229",          // X 手柄（不带 @）
     github: "youjunhui-sky",
-    email: "",                   // 留空不显示
+    email: "youjh120608@gmail.com", // 留空不显示
   };
   // ================================================
 
